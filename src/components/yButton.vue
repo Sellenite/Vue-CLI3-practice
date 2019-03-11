@@ -16,6 +16,7 @@ const oneOf = (value, validList) => {
 }
 
 export default {
+    inject: ['Home'],
     props: {
         size: {
             validator(value) {
@@ -27,6 +28,14 @@ export default {
             type: Boolean,
             default: false
         }
+    },
+    created() {
+        // 利用provide修改原组件的属性，执行原组件的函数
+        this.Home.updateButtonValue();
+        // 在自己实例触发的时间，也可以自己监听到
+        this.$on('on-click', (value) => {
+            console.log(`$on ${value}`);
+        });
     },
     methods: {
         handleClick() {

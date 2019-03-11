@@ -3,7 +3,7 @@
     <div>Welcome</div>
     <p>--------- Component Area ---------</p>
     <y-button size="large" @on-click="buttonClick($event, 1)">点我</y-button>
-    <y-button @click.native="buttonNativeClick">点我native</y-button>
+    <y-button @click.native="buttonNativeClick">{{ buttonValue }}</y-button>
 </div>
 </template>
 
@@ -11,6 +11,16 @@
 import yButton from '../components/yButton.vue';
 
 export default {
+    provide() {
+        return {
+            Home: this
+        }
+    },
+    data() {
+        return {
+            buttonValue: 1
+        }
+    },
     components: {
         yButton
     },
@@ -20,6 +30,9 @@ export default {
         },
         buttonNativeClick() {
             console.log('native click');
+        },
+        updateButtonValue() {
+            this.buttonValue = '点我native click';
         }
     }
 }
