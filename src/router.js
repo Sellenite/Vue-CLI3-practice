@@ -5,9 +5,9 @@ import Home from './views/Home.vue';
 Vue.use(Router);
 
 // 除了下面import的按需加载写法，还可以这样写
-const Detail = (resolve) => {
-    require.ensure(['./views/Detail.vue'], () => {
-        resolve(require('./views/Detail.vue'));
+const Form = (resolve) => {
+    require.ensure(['./views/Form.vue'], () => {
+        resolve(require('./views/Form.vue'));
     });
 }
 
@@ -36,9 +36,9 @@ export default new Router({
             component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
         },
         {
-            path: '/detail',
-            name: 'detail',
-            component: Detail
+            path: '/form',
+            name: 'form',
+            component: Form
         }
     ]
 })

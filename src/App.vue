@@ -3,7 +3,7 @@
         <div id="nav">
             <router-link to="/">Home</router-link> |
             <router-link to="/about">About</router-link> |
-            <router-link to="/detail">Detail</router-link>
+            <router-link to="/form">Form</router-link>
         </div>
         <p @click="testBroadcast">点我往下子组件广播时间</p>
         <router-view />

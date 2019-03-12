@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import Emitter from '../mixins/emitter.js';
+import Emitter from '../../mixins/emitter.js';
 /* 验证传入的属性，不符合的话会阻止 */
 const oneOf = (value, validList) => {
     for (let i = 0; i < validList.length; i++) {

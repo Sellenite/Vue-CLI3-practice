@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import yButton from '../components/yButton.vue';
+import yButton from '../components/button/button.vue';
 import Emitter from '../mixins/emitter.js';
 
 export default {
