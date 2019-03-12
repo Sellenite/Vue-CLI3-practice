@@ -1,11 +1,11 @@
 <template>
 <div class="form">
-    <y-form>
-        <y-form-item>
-            <y-input></y-input>
+    <y-form :model="formValidate" :rules="ruleValidate">
+        <y-form-item label="用户名" prop="name">
+            <y-input v-model="formValidate.name"></y-input>
         </y-form-item>
-        <y-form-item>
-            <y-input></y-input>
+        <y-form-item label="邮箱" prop="email">
+            <y-input v-model="formValidate.email"></y-input>
         </y-form-item>
     </y-form>
 </div>
@@ -36,7 +36,7 @@ export default {
                         trigger: 'blur'
                     }
                 ],
-                mail: [
+                email: [
                     {
                         required: true,
                         message: '邮箱不能为空',
