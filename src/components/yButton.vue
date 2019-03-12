@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import Emitter from '../mixins/emitter.js';
 /* 验证传入的属性，不符合的话会阻止 */
 const oneOf = (value, validList) => {
     for (let i = 0; i < validList.length; i++) {
@@ -16,7 +17,9 @@ const oneOf = (value, validList) => {
 }
 
 export default {
+    name: 'y-button',
     inject: ['Home'],
+    mixins: [Emitter],
     props: {
         size: {
             validator(value) {
@@ -36,10 +39,15 @@ export default {
         this.$on('on-click', (value) => {
             console.log(`$on ${value}`);
         });
+        // 父组件往下广播事件
+        this.$on('broadcast-event', (text) => {
+            console.log(text);
+        });
     },
     methods: {
         handleClick() {
             this.$emit('on-click', 'y-button');
+            this.dispatch('page-Home', 'dispatch-event', 'dispatch-payload');
         }
     }
 }

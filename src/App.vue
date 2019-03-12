@@ -5,9 +5,22 @@
             <router-link to="/about">About</router-link> |
             <router-link to="/detail">Detail</router-link>
         </div>
+        <p @click="testBroadcast">点我往下子组件广播时间</p>
         <router-view />
     </div>
 </template>
+
+<script>
+    import Emitter from './mixins/emitter.js';
+    export default {
+        mixins: [Emitter],
+        methods: {
+            testBroadcast() {
+                this.broadcast('y-button', 'broadcast-event', 'broadcast-payload');
+            }
+        }
+    }
+</script>
 
 <style lang="scss">
     #app {
