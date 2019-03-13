@@ -4,6 +4,7 @@
 
 <script>
 import Emitter from '../../mixins/emitter.js';
+import { findComponentUpward } from '../../utils/assist.js';
 export default {
     name: 'y-input',
     mixins: [Emitter],
@@ -22,6 +23,9 @@ export default {
         value(val) {
             this.currentValue = val;
         }
+    },
+    mounted() {
+        let form = findComponentUpward(this, 'y-form');
     },
     methods: {
         handleInput(e) {

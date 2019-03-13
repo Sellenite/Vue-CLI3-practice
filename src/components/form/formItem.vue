@@ -11,6 +11,7 @@
 <script>
 import Emitter from '../../mixins/emitter.js';
 import AsyncValidator from 'async-validator';
+import { findBrothersComponents } from '../../utils/assist.js';
 export default {
     name: 'y-formItem',
     mixins: [Emitter],
@@ -44,6 +45,8 @@ export default {
             this.initialValue = this.fieldValue;
             this.setRules();
         }
+        let bros = findBrothersComponents(this, 'y-formItem');
+        console.log(bros);
     },
     // 销毁组件时，将实例从form的缓存里删去
     beforeDestory() {
@@ -59,7 +62,6 @@ export default {
         },
         setRules() {
             let rules = this.getRules();
-            console.log(rules)
             let isRequired = rules.some((rule) => {
                 return rule.required === true;
             })

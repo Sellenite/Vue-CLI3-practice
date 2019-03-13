@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import { findComponentDownward } from '../../utils/assist.js';
 export default {
     name: 'y-form',
     provide() {
@@ -38,6 +39,10 @@ export default {
             // 数组的indexOf也可以用来判断对象的位置
             this.fields.splice(this.fields.indexOf(ctx), 1);
         });
+    },
+    mounted() {
+        let input = findComponentDownward(this, 'y-input');
+        console.log(input);
     },
     methods: {
         resetFields() {

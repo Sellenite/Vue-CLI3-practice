@@ -19,6 +19,7 @@
 import yForm from '../components/form/form.vue';
 import yFormItem from '../components/form/formItem.vue';
 import yInput from '../components/input/input.vue';
+import { findComponentsDownward } from '../utils/assist.js';
 
 export default {
     components: {
@@ -68,6 +69,10 @@ export default {
         handleReset() {
             this.$refs.form.resetFields();
         }
+    },
+    mounted() {
+        let inputs = findComponentsDownward(this, 'y-input');
+        console.log(inputs);
     }
 }
 </script>
