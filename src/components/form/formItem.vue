@@ -1,8 +1,9 @@
 <template>
 <div class="y-formItem">
-    <label v-if="label">{{ label }}</label>
-    <div>
+    <label v-if="label" :class="{'required': isRequired}">{{ label }}</label>
+    <div class="wrapper">
         <slot></slot>
+        <span v-if="validateState === 'error'" class="errMsg">{{ validateMessage }}</span>
     </div>
 </div>
 </template>
@@ -25,6 +26,8 @@ export default {
     },
     data() {
         return {
+            isRequired: false,
+            initialValue: '',
             validateState: '', // 校验状态
             validateMessage: '', // 校验不通过提示的信息
         }
@@ -38,6 +41,7 @@ export default {
     mounted() {
         if (this.prop) {
             this.dispatch('y-form', 'on-formItem-mounted', this);
+            this.initialValue = this.fieldValue;
             this.setRules();
         }
     },
@@ -54,6 +58,12 @@ export default {
             return formRules.slice();
         },
         setRules() {
+            let rules = this.getRules();
+            console.log(rules)
+            let isRequired = rules.some((rule) => {
+                return rule.required === true;
+            })
+            this.isRequired = isRequired;
             this.$on('on-form-change', this.onFieldChange);
             this.$on('on-form-blur', this.onFieldBlur);
         },
@@ -73,7 +83,7 @@ export default {
         validate(trigger, callback = function() {}) {
             let rules = this.getFilteredRule(trigger);
             if (!rules || rules.length === 0) {
-                return
+                return;
             }
             this.validateState = 'validating';
             /* 第三方插件调用方法 */
@@ -90,6 +100,12 @@ export default {
                 callback(this.validateMessage);
             });
         },
+        // 重置之前的值，并非赋值为空
+        resetField() {
+            this.validateState = '';
+            this.validateMessage = '';
+            this.form.model[this.prop] = this.initialValue;
+        },
         onFieldChange() {
             this.validate('change');
         },
@@ -103,5 +119,23 @@ export default {
 <style lang="scss" scoped>
 .y-formItem {
     margin-bottom: 10px;
+    label {
+        display: inline-block;
+        vertical-align: middle;
+        &.required:after {
+            content: '*';
+            color: red;
+        }
+    }
+    .wrapper {
+        display: inline-block;
+        margin-left: 6px;
+        vertical-align: middle;
+        .errMsg {
+            color: red;
+            vertical-align: middle;
+            margin-left: 6px;
+        }
+    }
 }
 </style>

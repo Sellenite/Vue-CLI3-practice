@@ -38,6 +38,29 @@ export default {
             // 数组的indexOf也可以用来判断对象的位置
             this.fields.splice(this.fields.indexOf(ctx), 1);
         });
+    },
+    methods: {
+        resetFields() {
+            this.fields.forEach((field) => {
+                field.resetField();
+            });
+        },
+        validate(callback) {
+            let valid = true;
+            let count = 0;
+            this.fields.forEach((field) => {
+                field.validate('', (error) => {
+                    if (error) {
+                        valid = false
+                    }
+                    if (++count === this.fields.length) {
+                        if (typeof callback === 'function') {
+                            callback(error);
+                        }
+                    }
+                });
+            });
+        }
     }
 }
 </script>

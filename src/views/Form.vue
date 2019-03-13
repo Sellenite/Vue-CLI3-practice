@@ -1,6 +1,6 @@
 <template>
 <div class="form">
-    <y-form :model="formValidate" :rules="ruleValidate">
+    <y-form :model="formValidate" :rules="ruleValidate" ref="form">
         <y-form-item label="用户名" prop="name">
             <y-input v-model="formValidate.name"></y-input>
         </y-form-item>
@@ -8,6 +8,10 @@
             <y-input v-model="formValidate.email"></y-input>
         </y-form-item>
     </y-form>
+    <div>
+        <button @click="handleSubmit">提交</button>
+        <button @click="handleReset">重置</button>
+    </div>
 </div>
 </template>
 
@@ -49,6 +53,20 @@ export default {
                     }
                 ],
             }
+        }
+    },
+    methods: {
+        handleSubmit() {
+            this.$refs.form.validate((error) => {
+                if (error) {
+                    console.log('表单校验失败');
+                } else {
+                    console.log('表单验证通过');
+                }
+            });
+        },
+        handleReset() {
+            this.$refs.form.resetFields();
         }
     }
 }
