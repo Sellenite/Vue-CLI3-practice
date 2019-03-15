@@ -4,6 +4,7 @@
     <p>--------- Component Area ---------</p>
     <y-button size="large" @on-click="buttonClick($event, 1)">点我</y-button>
     <y-button @click.native="buttonNativeClick">{{ buttonValue }}</y-button>
+    <y-button @on-click="alertClick">点我全局Alert</y-button>
 </div>
 </template>
 
@@ -45,6 +46,11 @@ export default {
         },
         updateButtonValue() {
             this.buttonValue = '点我native click';
+        },
+        alertClick() {
+            this.$Alert.info({
+                content: '警告'
+            })
         }
     }
 }

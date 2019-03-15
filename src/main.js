@@ -1,9 +1,12 @@
 import Vue from 'vue';
 import App from './App.vue';
+import Alert from './components/alert/alert.js';
 import router from './router';
 import store from './store';
 
 Vue.config.productionTip = false;
+
+Vue.prototype.$Alert = Alert;
 
 // 前端客户端代码之所以可以打印process.env.NODE_ENV变量，是由于使用了webpack的DefinePlugin内置插件
 // 开发环境是development，生产环境是production，CLI可通过.env文件修改默认配置
