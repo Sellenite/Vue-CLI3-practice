@@ -56,7 +56,6 @@
         },
         mounted () {
             this.parent = findComponentUpward(this, 'iCheckboxGroup');
-            console.log(this.parent)
 
             if (this.parent) {
                 this.group = true;
