@@ -11,6 +11,7 @@ import TreeNode from "./node.vue";
 import { deepCopy } from "../../utils/assist.js";
 export default {
     name: "y-tree",
+    components: { TreeNode },
     props: {
         data: {
             type: Array,
@@ -26,6 +27,9 @@ export default {
             cloneData: []
         };
     },
+    created() {
+        this.rebuildData();
+    },
     watch: {
         data() {
             this.rebuildData();
@@ -33,7 +37,7 @@ export default {
     },
     methods: {
         rebuildData() {
-            this.cloneData = deepCopy(this.data)
+            this.cloneData = deepCopy(this.data);
         }
     }
 };

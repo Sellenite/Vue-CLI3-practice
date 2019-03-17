@@ -5,17 +5,20 @@
         <dynamic-button>按钮</dynamic-button>
         <dynamic-button to="https://www.baidu.com">跳转链接</dynamic-button>
         <dynamic-button to="https://www.baidu.com" target="_blank">跳转链接，新窗口</dynamic-button>
+        <tree :data="tree" :showCheckbox="true"></tree>
     </div>
 </template>
 
 <script>
     import tableRender from '../components/table/table-render.vue';
     import dynamicButton from '../components/dynamic-button/dynamic-button.vue';
+    import tree from '../components/tree/tree.vue';
 
     export default {
         components: {
             tableRender,
-            dynamicButton
+            dynamicButton,
+            tree
         },
         data() {
             return {
@@ -40,6 +43,38 @@
                     {
                         name: 'qwe',
                         age: '20'
+                    }
+                ],
+                tree: [
+                    {
+                        title: 'parent 1',
+                        expand: true,
+                        children: [
+                            {
+                                title: 'parnet 1-1',
+                                expand: true,
+                                children: [
+                                    {
+                                        title: 'leaf 1-1-1'
+                                    },
+                                    {
+                                        title: 'leaf 1-1-2'
+                                    }
+                                ]
+                            },
+                            {
+                                title: 'parnet 1-2',
+                                expand: true,
+                                children: [
+                                    {
+                                        title: 'leaf 1-2-1'
+                                    },
+                                    {
+                                        title: 'leaf 1-2-2'
+                                    }
+                                ]
+                            }
+                        ]
                     }
                 ]
             }
