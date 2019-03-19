@@ -6,6 +6,7 @@
 </div>
 </template>
 <script>
+import Bus from '../../utils/eventBus.js';
 export default {
     name: 'InputNumber',
     props: {
@@ -22,6 +23,11 @@ export default {
         number(val) {
             this.currentValue = val;
         }
+    },
+    created() {
+        Bus.$on('eventBus', (val) => {
+            console.log(val);
+        });
     },
     methods: {
         increase(val) {
